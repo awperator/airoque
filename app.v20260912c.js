@@ -164,6 +164,13 @@
           "<p>Email <a href=\"mailto:" + SUPPORT_EMAIL + "\">" + SUPPORT_EMAIL + "</a> or leave your name, email, company, and a short message below — we typically respond within one business day.</p>" +
           "<p>Phone: <a href=\"tel:+18055011013\">" + SUPPORT_TEL + "</a> (Mon–Fri, 8:00 AM–5:00 PM Pacific).</p>",
         showLead: true
+      },
+      "QMS Pulse": {
+        html:
+          "<p><strong>AiroQue QMS Pulse</strong> is a SAP-only subscription that watches quality notifications, notifies owners of pending work, and shows backlog aging and cycle time. It is not documentation consulting.</p>" +
+          "<p>Starting at <strong>$1,500 / month</strong>. Scales with plants and seats. SAP connect / setup quoted separately.</p>" +
+          "<p>To run Pulse you provide: a <strong>dedicated machine</strong> (always-on host), a <strong>dedicated SAP user</strong> that can actively pull new QM12 quality-notification reports, and a <strong>directory of employees and emails</strong> so notices reach the right people.</p>" +
+          "<p>Details: <a href=\"/qms-pulse\">QMS Pulse</a>.</p>"
       }
     };
 
@@ -344,8 +351,11 @@
           "<p>NDA is available on request before detailed technical information is exchanged. Project information is treated as confidential.</p>" +
           "<p>Leave your contact details below (no export-controlled data), or email <a href=\"mailto:" + SUPPORT_EMAIL + "\">" + SUPPORT_EMAIL + "</a>.</p>";
         showLead = true;
+      } else if (/\bqms\s*pulse|\bqm12\b|quality[- ]notifications?/.test(t) ||
+                 (/\bpulse\b/.test(t) && !/\bcontrol\s*plan|pfmea\b/.test(t))) {
+        html = FAQ["QMS Pulse"].html;
       } else if (/\b(price|pricing|cost|rate|how much|quote|fee)\b/.test(t) &&
-                 !/\bcontrol\s*plan|pfmea|apqp|inspection|work\s*instruction|process\s*flow|monthly|alignment|engineering\s*change|qms|quality[- ]system\b/.test(t)) {
+                 !/\bcontrol\s*plan|pfmea|apqp|inspection|work\s*instruction|process\s*flow|monthly|alignment|engineering\s*change|qms|quality[- ]system|pulse\b/.test(t)) {
         html = FAQ["Pricing"].html;
         showLead = true;
       } else if (/\bcontrol\s*plan|cp\b/.test(t)) {
@@ -374,7 +384,8 @@
         html =
           "<p><strong>Engineering change impact reviews</strong> identify which quality documents a revision affects before it bites production.</p>" +
           "<p>Starting rate: from <strong>$500</strong>. See <a href=\"/engineering-change-impact\">Engineering Change Impact</a>.</p>";
-      } else if (/\bquality[- ]system|qms|procedure|document\s*control\b/.test(t)) {
+      } else if (/\bquality[- ]system|procedure|document\s*control\b/.test(t) ||
+                 (/\bqms\b/.test(t) && !/\bpulse\b/.test(t))) {
         html =
           "<p><strong>Quality-system documentation</strong> support covers procedures, forms, records, and change control for aerospace QMS work.</p>" +
           "<p>Starting rate: from <strong>$1,500</strong>. AiroQue does not certify AS9100. See <a href=\"/quality-system-documentation\">Quality-system documentation</a>.</p>";
