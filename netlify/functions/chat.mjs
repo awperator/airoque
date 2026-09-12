@@ -179,7 +179,7 @@ export default async (req) => {
 
   try {
     const reply = await callChatCompletions(cfg, messages);
-    const showLead = /(quote|nda|leave a message|lead form|request a quote|scoped quote|confidential project review|follow-?up form)/i.test(reply);
+    const showLead = /\b(quote|nda|leave a message|lead form|request a quote|scoped quote|confidential project review|follow-?up form)\b/i.test(reply);
     return json(
       200,
       {

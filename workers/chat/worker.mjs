@@ -139,7 +139,7 @@ export default {
         JSON.stringify({
           reply,
           mode: "worker",
-          showLead: /(quote|nda|leave a message|lead form|request a quote|scoped quote|confidential project review|follow-?up form)/i.test(reply),
+          showLead: /\b(quote|nda|leave a message|lead form|request a quote|scoped quote|confidential project review|follow-?up form)\b/i.test(reply),
           sessionId,
           replyPath,
         }),
